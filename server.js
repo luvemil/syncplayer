@@ -78,8 +78,12 @@ io.sockets.on('connection', function(socket) {
     io.sockets.emit('resetVideo');
   });
 
-  socket.on('pressSync', function() {
-    io.sockets.emit('syncVideo');
+  socket.on('pressSync', function(data) {
+    io.sockets.emit('syncVideo', data);
+  });
+
+  socket.on('setNewVideoId', function(data) {
+    io.sockets.emit('pushNewVideoId', data);
   });
 
 });

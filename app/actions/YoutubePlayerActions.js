@@ -4,7 +4,8 @@ import {assign} from 'underscore';
 class YoutubePlayerActions {
   constructor() {
     this.generateActions(
-      'playerSyncVideo'
+      'newVideoId',
+      'updateSearchQuery'
     );
   }
 }

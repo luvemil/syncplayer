@@ -2,6 +2,7 @@ import React from 'react';
 import YouTube from 'react-youtube';
 import YoutubePlayerStore from '../stores/YoutubePlayerStore';
 import YoutubePlayerActions from '../actions/YoutubePlayerActions';
+import Controls from './Controls';
 
 class YoutubePlayer extends React.Component {
   constructor(props) {
@@ -20,10 +21,30 @@ class YoutubePlayer extends React.Component {
 
   onChange(state) {
     this.setState(state);
+    console.log("SearchQuery: " + state.searchQuery);
+    console.log("VideoId: " + state.videoid);
+  }
+
+  pressPlay() {
+    this.props.socket.emit('pressPlay');
+  }
+
+  pressPause() {
+    this.props.socket.emit('pressPause');
+  }
+
+  pressSync() {
+    this.props.socket.emit('pressSync', {time: this.player.getCurrentTime()});
+  }
+
+  pressReset() {
+    this.props.socket.emit('pressReset');
   }
 
   onReadyHandler(event) {
     let socket = this.props.socket;
+
+    this.player = event.target;
 
     socket.on('playVideo', (data) => {
       event.target.playVideo();
@@ -34,25 +55,41 @@ class YoutubePlayer extends React.Component {
     });
 
     socket.on('syncVideo', (data) => {
-      console.log("Received Sync Video");
+      event.target.seekTo(data.time);
     });
 
     socket.on('resetVideo', (data) => {
       event.target.seekTo(0);
     });
+
+    socket.on('pushNewVideoId', (data) => {
+      YoutubePlayerActions.newVideoId(data);
+    });
   }
 
   render() {
+    var buttonPresses = {
+      pressPlay: this.pressPlay.bind(this),
+      pressPause: this.pressPause.bind(this),
+      pressSync: this.pressSync.bind(this),
+      pressReset: this.pressReset.bind(this)
+    };
+
     const opts={
       height: '390',
       width: '640'
     }
+
     return (
-      <YouTube
-        videoId={this.state.videoid}
-        opts={opts}
-        onReady={this.onReadyHandler.bind(this)}
-      />
+      <div>
+        <YouTube
+          videoId={this.state.videoid}
+          opts={opts}
+          onReady={this.onReadyHandler.bind(this)}
+        />
+        <br />
+        <Controls callbacks={buttonPresses} />
+      </div>
     );
   }
 }

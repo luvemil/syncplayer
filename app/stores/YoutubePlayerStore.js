@@ -5,10 +5,15 @@ class YoutubePlayerStore {
   constructor() {
     this.bindActions(YoutubePlayerActions);
     this.videoid="jZxzz-N3oxM";
+    this.searchQuery=''
   }
 
-  onPlayerSyncVideo(payload) {
-    ;
+  onNewVideoId(payload) {
+    this.videoid = payload.newVideoId;
+  }
+
+  onUpdateSearchQuery(event) {
+    this.searchQuery = event.target.value;
   }
 }
 
