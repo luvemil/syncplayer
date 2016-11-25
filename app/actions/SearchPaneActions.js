@@ -5,12 +5,13 @@ class SearchPaneActions {
     this.generateActions(
       'addToQueue',
       'getSearchResultsSuccess',
-      'getSearchResultsFail'
+      'getSearchResultsFail',
+      'updateSearchQuery'
     );
   }
 
-  getSearchResults() {
-    $.ajax({ url: '/api/searchvid/test' })
+  getSearchResults(searchquery) {
+    $.ajax({ url: '/api/searchvid/' + searchquery })
       .done(data => {
         this.actions.getSearchResultsSuccess(data);
       });

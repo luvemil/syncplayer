@@ -6,10 +6,15 @@ class SearchPaneStore {
     this.bindActions(SearchPaneActions);
     this.queue = [];
     this.searchresults = [];
+    this.searchquery = '';
   }
 
   onGetSearchResultsSuccess(data) {
     this.searchresults = data.items;
+  }
+
+  onUpdateSearchQuery(event) {
+    this.searchquery = event.target.value;
   }
 }
 
