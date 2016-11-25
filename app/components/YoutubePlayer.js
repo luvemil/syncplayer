@@ -66,7 +66,7 @@ class YoutubePlayer extends React.Component {
       YoutubePlayerActions.newVideoId(data);
     });
 
-    socket.on('pushPlaylistId', (data) => {
+    socket.on('pushNewPlaylistId', (data) => {
       YoutubePlayerActions.newPlaylistId(data);
     });
   }
@@ -81,7 +81,10 @@ class YoutubePlayer extends React.Component {
 
     const opts={
       height: '390',
-      width: '640'
+      width: '640',
+      playerVars: {
+        listType: 'playlist'
+      }
     }
 
     return (

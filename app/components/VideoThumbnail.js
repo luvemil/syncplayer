@@ -24,7 +24,7 @@ class VideoThumbnail extends React.Component {
         <div className='col-sm-6'>
           <p>
             <strong>{this.props.item.snippet.title}</strong><br />
-            <small>{this.props.item.snippet.channelTitle}</small>
+            <small>{this.props.item.snippet.channelTitle}</small><br />
           </p>
         </div>
         <div className='col-sm-2'>

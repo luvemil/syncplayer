@@ -24,7 +24,7 @@ class SearchBar extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    this.props.socket.emit('setNewVideoId',{newVideoId: this.state.searchQuery});
+    this.props.socket.emit('setNewVideoId',{videoid: this.state.searchQuery});
   }
 
 

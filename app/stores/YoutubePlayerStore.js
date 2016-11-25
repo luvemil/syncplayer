@@ -14,7 +14,8 @@ class YoutubePlayerStore {
   }
 
   onNewPlaylistId(payload) {
-    this.player.cuePlaylist(payload.playlistid);
+    console.log("Going to load: "+payload.playlistid);
+    this.player.loadPlaylist(payload.playlistid);
   }
 
   onUpdateSearchQuery(event) {
