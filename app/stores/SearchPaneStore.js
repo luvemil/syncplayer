@@ -7,6 +7,10 @@ class SearchPaneStore {
     this.queue = [];
     this.searchresults = [];
   }
+
+  onGetSearchResultsSuccess(data) {
+    this.searchresults = data.items;
+  }
 }
 
 export default alt.createStore(SearchPaneStore);

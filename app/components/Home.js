@@ -4,6 +4,7 @@ import {first, without, findWhere} from 'underscore';
 import YoutubePlayer from './YoutubePlayer';
 import io from 'socket.io-client';
 import SearchBar from './SearchBar';
+import SearchPane from './SearchPane';
 
 const socket = io('');
 
@@ -22,7 +23,16 @@ class Home extends React.Component {
             <YoutubePlayer socket={socket} />
           </div>
           <div className='col-sm-offset-2 col-sm-4 col-lg-3'>
-            <SearchBar socket={socket} />
+            <div className='row'>
+              <div className='col-sm-12'>
+                <SearchBar socket={socket} />
+              </div>
+            </div>
+            <div className='row'>
+              <div className='col-sm-12'>
+                <SearchPane />
+              </div>
+            </div>
           </div>
         </div>
       </div>

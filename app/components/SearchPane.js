@@ -1,6 +1,8 @@
 import React from 'react';
 import SearchPaneStore from '../stores/SearchPaneStore';
 import SearchPaneActions from '../actions/SearchPaneActions';
+import VideoThumbnail from './VideoThumbnail';
+import {first, without, findWhere} from 'underscore';
 
 class SearchPane extends React.Component {
   constructor(props) {
@@ -11,6 +13,7 @@ class SearchPane extends React.Component {
 
   componentDidMount() {
     SearchPaneStore.listen(this.onChange);
+    SearchPaneActions.getSearchResults();
   }
 
   componentWillUnmount() {
@@ -22,9 +25,14 @@ class SearchPane extends React.Component {
   }
 
   render() {
+    var videos = this.state.searchresults.map((item, index) => {
+      return (
+        <VideoThumbnail thumb={item.snippet.thumbnails.default.url} />
+      )
+    });
     return (
       <div>
-        <p>Haha</p>
+        {videos}
       </div>
     )
   }
