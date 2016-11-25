@@ -13,7 +13,6 @@ class SearchPane extends React.Component {
 
   componentDidMount() {
     SearchPaneStore.listen(this.onChange);
-    SearchPaneActions.getSearchResults();
   }
 
   componentWillUnmount() {
@@ -24,15 +23,24 @@ class SearchPane extends React.Component {
     this.setState(state);
   }
 
+  handleClick() {
+    SearchPaneActions.getSearchResults();
+  }
+
   render() {
     var videos = this.state.searchresults.map((item, index) => {
       return (
-        <VideoThumbnail thumb={item.snippet.thumbnails.default.url} />
+        <li className="list-group-item">
+          <VideoThumbnail thumb={item.snippet.thumbnails.default.url} />
+        </li>
       )
     });
     return (
       <div>
-        {videos}
+        <button className='btn btn-default' onClick={this.handleClick.bind(this)}>Search</button>
+        <ul className='list-group'>
+          {videos}
+        </ul>
       </div>
     )
   }
