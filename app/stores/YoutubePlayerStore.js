@@ -19,6 +19,14 @@ class YoutubePlayerStore {
   onGetCurrentVideoSuccess(data) {
     this.videoid = data.videoid;
   }
+
+  onRegisterSocket(data) {
+    this.socket = data.socket;
+  }
+
+  onSendNewVideoId(data) {
+    this.socket.emit('setNewVideoId',{newVideoId: data.videoid});
+  }
 }
 
 export default alt.createStore(YoutubePlayerStore);

@@ -9,6 +9,7 @@ class YoutubePlayer extends React.Component {
     super(props);
     this.state = YoutubePlayerStore.getState();
     this.onChange = this.onChange.bind(this);
+    YoutubePlayerActions.registerSocket({socket: this.props.socket});
   }
 
   componentDidMount() {

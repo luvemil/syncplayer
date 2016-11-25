@@ -32,9 +32,7 @@ class SearchPane extends React.Component {
   render() {
     var videos = this.state.searchresults.map((item, index) => {
       return (
-        <li className="list-group-item">
-          <VideoThumbnail thumb={item.snippet.thumbnails.default.url} />
-        </li>
+        <VideoThumbnail item={item} />
       )
     });
     return (

@@ -7,7 +7,9 @@ class YoutubePlayerActions {
       'newVideoId',
       'updateSearchQuery',
       'getCurrentVideoSuccess',
-      'getCurrentVideoFail'
+      'getCurrentVideoFail',
+      'registerSocket',
+      'sendNewVideoId'
     );
   }
 
