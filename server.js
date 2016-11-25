@@ -126,6 +126,10 @@ io.sockets.on('connection', function(socket) {
     currentvid = data.newVideoId;
   });
 
+  socket.on('setNewPlaylistId', function(data) {
+    io.sockets.emit('pushNewPlaylistId', data);
+  });
+
 });
 
 server.listen(app.get('port'), function() {

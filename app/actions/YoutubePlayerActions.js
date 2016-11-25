@@ -5,11 +5,14 @@ class YoutubePlayerActions {
   constructor() {
     this.generateActions(
       'newVideoId',
+      'newPlaylistId',
       'updateSearchQuery',
       'getCurrentVideoSuccess',
       'getCurrentVideoFail',
       'registerSocket',
-      'sendNewVideoId'
+      'registerPlayer',
+      'sendNewVideoId',
+      'sendNewPlaylistId'
     );
   }
 

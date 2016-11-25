@@ -34,7 +34,7 @@ class YoutubePlayer extends React.Component {
   }
 
   pressSync() {
-    this.props.socket.emit('pressSync', {time: this.player.getCurrentTime()});
+    this.props.socket.emit('pressSync', {time: this.state.player.getCurrentTime()});
   }
 
   pressReset() {
@@ -44,7 +44,7 @@ class YoutubePlayer extends React.Component {
   onReadyHandler(event) {
     let socket = this.props.socket;
 
-    this.player = event.target;
+    YoutubePlayerActions.registerPlayer({player: event.target});
 
     socket.on('playVideo', (data) => {
       event.target.playVideo();
@@ -65,6 +65,10 @@ class YoutubePlayer extends React.Component {
     socket.on('pushNewVideoId', (data) => {
       YoutubePlayerActions.newVideoId(data);
     });
+
+    socket.on('pushPlaylistId', (data) => {
+      YoutubePlayerActions.newPlaylistId(data);
+    });
   }
 
   render() {
@@ -82,11 +86,13 @@ class YoutubePlayer extends React.Component {
 
     return (
       <div>
-        <YouTube
-          videoId={this.state.videoid}
-          opts={opts}
-          onReady={this.onReadyHandler.bind(this)}
-        />
+        <div className='embed-responsive embed-responsive-16by9'>
+          <YouTube
+            videoId={this.state.videoid}
+            opts={opts}
+            onReady={this.onReadyHandler.bind(this)}
+          />
+        </div>
         <br />
         <Controls callbacks={buttonPresses} />
       </div>

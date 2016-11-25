@@ -22,7 +22,7 @@ class Home extends React.Component {
           <div className='col-sm-6 col-lg-6'>
             <YoutubePlayer socket={socket} />
           </div>
-          <div className='col-sm-offset-2 col-sm-4 col-lg-3'>
+          <div className='col-lg-6 col-sm-3'>
             <div className='row'>
               <div className='col-sm-12'>
                 <SearchBar socket={socket} />

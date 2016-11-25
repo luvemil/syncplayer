@@ -37,20 +37,22 @@ class SearchPane extends React.Component {
     });
     return (
       <div>
-        <form ref='searchVideoForm' className='form-inline' onSubmit={this.handleSubmit.bind(this)}>
-          <div className='form-group'>
-            <label>Search: </label>
-            <div className='input-group'>
-              <input type='text' className='form-control' id='searchinput' value={this.state.searchquery} onChange={SearchPaneActions.updateSearchQuery}/>
-              <span className='input-group-btn'>
-                <button className='btn btn-default' onClick={this.handleSubmit.bind(this)} type='submit'>Go</button>
-              </span>
-            </div>
+        <div className='row'>
+          <div className='col-sm-12'>
+            <form ref='searchVideoForm' className='form-inline' onSubmit={this.handleSubmit.bind(this)}>
+              <div className='form-group'>
+                <label>Search: </label>
+                <div className='input-group'>
+                  <input type='text' className='form-control' id='searchinput' value={this.state.searchquery} onChange={SearchPaneActions.updateSearchQuery}/>
+                  <span className='input-group-btn'>
+                    <button className='btn btn-default' onClick={this.handleSubmit.bind(this)} type='submit'>Go</button>
+                  </span>
+                </div>
+              </div>
+            </form>
           </div>
-        </form>
-        <ul className='list-group'>
-          {videos}
-        </ul>
+        </div>
+        {videos}
       </div>
     )
   }

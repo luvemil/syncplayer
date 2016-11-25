@@ -6,10 +6,15 @@ class YoutubePlayerStore {
     this.bindActions(YoutubePlayerActions);
     this.videoid='';
     this.searchQuery='';
+    this.playlistid='';
   }
 
   onNewVideoId(payload) {
-    this.videoid = payload.newVideoId;
+    this.videoid = payload.videoid;
+  }
+
+  onNewPlaylistId(payload) {
+    this.player.cuePlaylist(payload.playlistid);
   }
 
   onUpdateSearchQuery(event) {
@@ -24,8 +29,16 @@ class YoutubePlayerStore {
     this.socket = data.socket;
   }
 
+  onRegisterPlayer(data) {
+    this.player = data.player;
+  }
+
   onSendNewVideoId(data) {
-    this.socket.emit('setNewVideoId',{newVideoId: data.videoid});
+    this.socket.emit('setNewVideoId',data);
+  }
+
+  onSendNewPlaylistId(data) {
+    this.socket.emit('setNewPlaylistId',data);
   }
 }
 
