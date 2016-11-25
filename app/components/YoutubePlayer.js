@@ -22,8 +22,6 @@ class YoutubePlayer extends React.Component {
 
   onChange(state) {
     this.setState(state);
-    console.log("SearchQuery: " + state.searchQuery);
-    console.log("VideoId: " + state.videoid);
   }
 
   pressPlay() {

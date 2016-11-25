@@ -1,6 +1,11 @@
 // Import config
 var config = require('./config');
 
+// Requests/async
+
+var async = require('async');
+var request = require('request');
+
 // Babel
 require('babel-register');
 
@@ -32,11 +37,34 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 /**
  * GET /api/currentvid
- * Return current video id
+ * Returns current video id
  */
 var currentvid = 'JS91p-vmSf0'
 app.get('/api/current', function(req, res, next) {
   res.send({videoid: currentvid});
+});
+
+/**
+ * GET /api/searchvid
+ * Makes a search on Youtube using the Youtube Data Api
+ */
+app.get('/api/searchvid/:string', function(req, res, next) {
+  var searchquery = req.params.string;
+  var youtubeSearchApiUrl = 'https://www.googleapis.com/youtube/v3/search'
+  /*
+   * GET https://www.googleapis.com/youtube/v3/search
+   * params:
+   *  part: string
+   *    research properties to get
+   *  q: string
+   *    search query
+   *  key: string
+   *    Youtube Api Key
+   */
+  var requrl = youtubeSearchApiUrl+"?part=snippet&q="+searchquery+"&key="+config.youtube_api_key;
+  request.get(requrl, function(err, request, body) {
+    res.send(JSON.parse(body));
+  });
 });
 
 
