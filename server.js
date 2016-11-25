@@ -30,6 +30,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Put Express stuff before React Middleware
 
+/**
+ * GET /api/currentvid
+ * Return current video id
+ */
+var currentvid = 'JS91p-vmSf0'
+app.get('/api/current', function(req, res, next) {
+  res.send({videoid: currentvid});
+});
+
+
 // React Middleware
 app.use(function(req, res) {
   Router.match({ routes: routes.default, location: req.url }, function(err, redirectLocation, renderProps) {
@@ -46,6 +56,7 @@ app.use(function(req, res) {
     }
   });
 });
+
 
 /**
  * Socket.io stuff.
@@ -84,6 +95,7 @@ io.sockets.on('connection', function(socket) {
 
   socket.on('setNewVideoId', function(data) {
     io.sockets.emit('pushNewVideoId', data);
+    currentvid = data.newVideoId;
   });
 
 });

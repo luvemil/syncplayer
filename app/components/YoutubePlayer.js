@@ -13,6 +13,7 @@ class YoutubePlayer extends React.Component {
 
   componentDidMount() {
     YoutubePlayerStore.listen(this.onChange);
+    YoutubePlayerActions.getCurrentVideo();
   }
 
   componentWillUnmount() {

@@ -4,8 +4,8 @@ import YoutubePlayerActions from '../actions/YoutubePlayerActions';
 class YoutubePlayerStore {
   constructor() {
     this.bindActions(YoutubePlayerActions);
-    this.videoid="jZxzz-N3oxM";
-    this.searchQuery=''
+    this.videoid='';
+    this.searchQuery='';
   }
 
   onNewVideoId(payload) {
@@ -14,6 +14,10 @@ class YoutubePlayerStore {
 
   onUpdateSearchQuery(event) {
     this.searchQuery = event.target.value;
+  }
+
+  onGetCurrentVideoSuccess(data) {
+    this.videoid = data.videoid;
   }
 }
 

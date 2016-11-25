@@ -18,10 +18,10 @@ class Home extends React.Component {
     return (
       <div className='container'>
         <div className='row'>
-          <div className='col-sm-6'>
+          <div className='col-sm-6 col-lg-6'>
             <YoutubePlayer socket={socket} />
           </div>
-          <div className='col-sm-6'>
+          <div className='col-sm-offset-2 col-sm-4 col-lg-3'>
             <SearchBar socket={socket} />
           </div>
         </div>

@@ -5,8 +5,20 @@ class YoutubePlayerActions {
   constructor() {
     this.generateActions(
       'newVideoId',
-      'updateSearchQuery'
+      'updateSearchQuery',
+      'getCurrentVideoSuccess',
+      'getCurrentVideoFail'
     );
+  }
+
+  getCurrentVideo() {
+    $.ajax({ url: '/api/current' })
+      .done((data) => {
+        this.actions.getCurrentVideoSuccess(data)
+      })
+      .fail((jqXhr) => {
+        this.actions.getCurrentVideoFail(jqXhr)
+      });
   }
 }
 
