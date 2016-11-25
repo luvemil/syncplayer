@@ -50,7 +50,7 @@ app.get('/api/current', function(req, res, next) {
  */
 app.get('/api/searchvid/:string', function(req, res, next) {
   var searchquery = req.params.string;
-  var youtubeSearchApiUrl = 'https://www.googleapis.com/youtube/v3/search'
+  var youtubeSearchApiUrl = 'https://www.googleapis.com/youtube/v3/search';
   /*
    * GET https://www.googleapis.com/youtube/v3/search
    * params:
@@ -61,10 +61,22 @@ app.get('/api/searchvid/:string', function(req, res, next) {
    *  key: string
    *    Youtube Api Key
    */
-  var requrl = youtubeSearchApiUrl+"?part=snippet&q="+searchquery+"&key="+config.youtube_api_key;
+  var requrl = youtubeSearchApiUrl+"?part=snippet&q="+searchquery+"&type=video&key="+config.youtube_api_key;
   request.get(requrl, function(err, request, body) {
     res.send(JSON.parse(body));
   });
+});
+
+app.get('/api/searchvid/:string/page/:pagetoken',function(req,res,next) {
+  var searchquery = req.params.string;
+  var pagetoken = req.param.pagetoken;
+  var youtubeSearchApiUrl = 'https://www.googleapis.com/youtube/v3/search';
+
+  var requrl = youtubeSearchApiUrl+"?part=snippet&q="+searchquery+"&type=video&pageToken"+pagetoken+"&key="+config.youtube_api_key;
+  request.get(requrl, function(err, request, body) {
+    res.send(JSON.parse(body));
+  });
+
 });
 
 
