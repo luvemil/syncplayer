@@ -29,12 +29,29 @@ class SearchPane extends React.Component {
     SearchPaneActions.getSearchResults(this.state.searchquery.trim());
   }
 
+  handleLoadMore(event) {
+    SearchPaneActions.getNextSearchPage(this.state.currentsearch,this.state.nextpagetoken);
+  }
+
   render() {
     var videos = this.state.searchresults.map((item, index) => {
       return (
         <VideoThumbnail item={item} />
       )
     });
+
+    // var morebutton = (<div></div>) ;
+    //
+    // if(this.state.nextpagetoken != ''){
+    //   morebutton = (
+    //     <div className='row'>
+    //       <div className='col-sm-12'>
+    //         <button className='btn btn-default' onClick={SearchPaneActions.getNextSearchPage(this.state.currentsearch,this.state.nextpagetoken)}>Load More</button>
+    //       </div>
+    //     </div>
+    //   );
+    // }
+
     return (
       <div>
         <div className='row'>
@@ -53,6 +70,11 @@ class SearchPane extends React.Component {
           </div>
         </div>
         {videos}
+        <div className='row'>
+          <div className='col-sm-12'>
+            <button className='btn btn-default' onClick={this.handleLoadMore.bind(this)}>Load More</button>
+          </div>
+        </div>
       </div>
     )
   }

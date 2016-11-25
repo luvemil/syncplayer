@@ -7,10 +7,25 @@ class SearchPaneStore {
     this.queue = [];
     this.searchresults = [];
     this.searchquery = '';
+    this.nextpagetoken = '';
   }
 
   onGetSearchResultsSuccess(data) {
     this.searchresults = data.items;
+    console.log(this.searchresults);
+  }
+
+  onSetCurrentSearch(searchquery) {
+    this.currentsearch = searchquery;
+  }
+
+  onSetNextPageToken(pagetoken) {
+    this.nextpagetoken = pagetoken;
+  }
+
+  onGetNextSearchPageSuccess(data) {
+    this.searchresults = this.searchresults.concat(data.items);
+    console.log(this.searchresults);
   }
 
   onUpdateSearchQuery(event) {
