@@ -2,11 +2,9 @@ import React from 'react';
 import {Link} from 'react-router';
 import {first, without, findWhere} from 'underscore';
 import YoutubePlayer from './YoutubePlayer';
-import io from 'socket.io-client';
 import SearchBar from './SearchBar';
 import SearchPane from './SearchPane';
-
-const socket = io('');
+import socket from '../socket';
 
 class Home extends React.Component {
 
