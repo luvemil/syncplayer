@@ -10,15 +10,13 @@ COPY package.json /usr/src/app
 
 RUN npm install
 
-RUN npm install -g bower gulp
-
 COPY bower.json /usr/src/app
-RUN bower --allow-root install
-
-COPY gulpfile.js /usr/src/app
-RUN gulp build
+RUN npm run bower
 
 COPY . /usr/src/app
+RUN npm run gulp
+
+COPY public /usr/src/app
 
 EXPOSE 3000
 
