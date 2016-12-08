@@ -81,10 +81,7 @@ class YoutubePlayer extends React.Component {
 
     const opts={
       height: '390',
-      width: '640',
-      playerVars: {
-        listType: 'playlist'
-      }
+      width: '640'
     }
 
     return (
