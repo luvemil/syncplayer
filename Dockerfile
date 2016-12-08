@@ -16,8 +16,6 @@ RUN npm run bower
 COPY . /usr/src/app
 RUN npm run gulp
 
-COPY public /usr/src/app
-
 EXPOSE 3000
 
 CMD ["npm", "start"]
